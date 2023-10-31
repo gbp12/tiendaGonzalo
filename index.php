@@ -9,7 +9,7 @@
 
 <body>
     <h1>Opciones</h1>
-    <a href="#">Crear producto</a>
+    <a href="./crear_producto/crear_producto.php">Crear producto</a>
     </br>
     </br>
     <a href="#">Consultar el listado de productos</a>
