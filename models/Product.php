@@ -29,3 +29,10 @@ function isNumberCheck($num)
         return false;
     }
 }
+
+
+//select
+
+//delete
+
+//modify
