@@ -2,8 +2,24 @@
 <?php
 
 include "../models/Product.php";
+$dbData= array("servername"=>"",
+"username"=>"",
+"password"=>"",
+"dbname"=>"");
 
 $res = checkCreateProduct($_POST["nombre"], $_POST["precio"], $_FILES['imagen']['name']);
+
+
+$defaultFile = fopen("../user_data.txt", "r");
+
+foreach ($dbData as $index => $value) {
+    $newLine = fgets($defaultFile);
+    echo"$newLine <br>";
+    $dbData[$index] = trim($newLine);
+}
+print_r($dbData);
+
+
 
 if ($res) {
     $nombre = $_POST["nombre"];
