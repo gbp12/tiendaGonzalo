@@ -7,7 +7,7 @@ $dbData= array("servername"=>"",
 "password"=>"",
 "dbname"=>"");
 
-$res = checkCreateProduct($_POST["nombre"], $_POST["precio"], $_FILES['imagen']['name']);
+$res = checkCreateProduct($_POST["nombre"], $_POST["precio"], $_FILES['imagen']['name'],$_POST["categoria"]);
 
 
 $defaultFile = fopen("../user_data.txt", "r");
@@ -26,15 +26,29 @@ if ($res) {
     $precio = $_POST["precio"];
     $categoria = $_POST["categoria"];
     $uploads_dir = '../imagenes';
-    $fileName = "";
+    $fileDir = savePic($fileName, $uploads_dir);
 
-    savePic($fileName, $uploads_dir);
+    $conn = new mysqli($dbData["servername"], $dbData["username"], $dbData["password"], $dbData["dbname"]);
 
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
 
-    echo "Producto " . $fileName . " creado con exito
+$sql = "INSERT INTO productos (id ,nombre, precio, imagen, categoría)
+VALUES ('NULL','$nombre', '$precio', '$fileDir', '$categoria')";
+
+if ($conn->query($sql) === TRUE) {
+    echo "Producto " . $nombre . " creado con exito
     <br><br>
     <a href = '../index.php'> Volver al formulario </a>
     ";
+} else {
+  echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+
+   
 } else {
     echo " <br><br><br>
     <a href = '../crear_producto/crear_producto.php'> Volver al formulario </a>
@@ -58,6 +72,7 @@ function savePic(&$fileName, $uploads_dir)
             $fileName = $nameArr[0] . "." . $nameArr[1];
         }
         move_uploaded_file($tmp_name, "$uploads_dir/$fileName");
+        return "$uploads_dir/$fileName";
     } else {
         echo "algo ha salido mal";
 

@@ -1,12 +1,20 @@
 <?php
 
-function checkCreateProduct($name, $price, $imagen)
+function checkCreateProduct($name, $price, $imagen, $select)
 {
-    if (nameCheck($name) && isNumberCheck($price) && imageCheck($imagen)) {
+    if (nameCheck($name) && isNumberCheck($price) && imageCheck($imagen) && selectCheck($select)) {
         return true;
     } else {
         return false;
     }
+}
+function selectCheck($select){
+if($select==""){
+    echo"Elige una categoria";
+    return false;
+}else{
+    return true;
+}
 }
 
 function imageCheck($imagen){
