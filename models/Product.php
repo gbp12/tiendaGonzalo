@@ -1,22 +1,36 @@
 <?php
 
-function checkCreateProduct($name, $price)
+function checkCreateProduct($name, $price, $imagen)
 {
-    if (nameCheck($name) && isNumberCheck($price)) {
+    if (nameCheck($name) && isNumberCheck($price) && imageCheck($imagen)) {
         return true;
     } else {
         return false;
     }
 }
 
+function imageCheck($imagen){
+    if($imagen == "") {
+echo"La imagen no puede estar vacia";
+return false;
+        }else{
+            return true;
+        }
+}
+
 function nameCheck($name)
 {
+
+    if($name == ""){
+        echo"El nombre esta vacio";
+        return false;
+    }
     $pattern = "/^\S*$/";
 
     if (preg_match($pattern, $name) == 1) {
         return true;
     } else {
-        echo "Error en el nombre";
+        echo "Error en el nombre, no puede contener espacios";
         return false;
     }
 }

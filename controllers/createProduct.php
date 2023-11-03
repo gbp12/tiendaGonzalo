@@ -3,7 +3,7 @@
 
 include "../models/Product.php";
 
-$res = checkCreateProduct($_POST["nombre"], $_POST["precio"]);
+$res = checkCreateProduct($_POST["nombre"], $_POST["precio"], $_FILES['imagen']['name']);
 
 if ($res) {
     $nombre = $_POST["nombre"];
