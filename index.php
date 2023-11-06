@@ -12,7 +12,7 @@
     <a href="./crear_producto/crear_producto.php">Crear producto</a>
     </br>
     </br>
-    <a href="#">Consultar el listado de productos</a>
+    <a href="./views/listProducts.php">Consultar el listado de productos</a>
     </br>
     </br>
     <a href="#">Modificar producto</a>
