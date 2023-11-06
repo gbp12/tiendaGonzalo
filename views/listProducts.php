@@ -1,10 +1,19 @@
 <?php
-$servername = "localhost";
-$username = "gonzalo";
-$password = "ak471234";
-$database = "tienda";
+$dbData = array(
+    "servername" => "",
+    "username" => "",
+    "password" => "",
+    "dbname" => ""
+);
+$defaultFile = fopen("../user_data.txt", "r");
 
-$conn = mysqli_connect($servername, $username, $password, $database);
+foreach ($dbData as $index => $value) {
+    $newLine = fgets($defaultFile);
+    $dbData[$index] = trim($newLine);
+}
+
+//$conn = mysqli_connect($servername, $username, $password, $database);
+$conn = mysqli_connect($dbData["servername"], $dbData["username"], $dbData["password"], $dbData["dbname"]);
 
 if (!$conn) {
     die("Error de conexión: " . mysqli_connect_error());
