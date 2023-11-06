@@ -2,22 +2,24 @@
 <?php
 
 include "../models/Product.php";
-$dbData= array("servername"=>"",
-"username"=>"",
-"password"=>"",
-"dbname"=>"");
+$dbData = array(
+    "servername" => "",
+    "username" => "",
+    "password" => "",
+    "dbname" => ""
+);
 
-$res = checkCreateProduct($_POST["nombre"], $_POST["precio"], $_FILES['imagen']['name'],$_POST["categoria"]);
+$res = checkCreateProduct($_POST["nombre"], $_POST["precio"], $_FILES['imagen']['name'], $_POST["categoria"]);
 
 
 $defaultFile = fopen("../user_data.txt", "r");
 
 foreach ($dbData as $index => $value) {
     $newLine = fgets($defaultFile);
-    echo"$newLine <br>";
+    //echo"$newLine <br>";
     $dbData[$index] = trim($newLine);
 }
-print_r($dbData);
+//print_r($dbData);
 
 
 
@@ -30,25 +32,22 @@ if ($res) {
 
     $conn = new mysqli($dbData["servername"], $dbData["username"], $dbData["password"], $dbData["dbname"]);
 
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
 
-$sql = "INSERT INTO productos (id ,nombre, precio, imagen, categoría)
+    $sql = "INSERT INTO productos (id ,nombre, precio, imagen, categoría)
 VALUES ('NULL','$nombre', '$precio', '$fileDir', '$categoria')";
 
-if ($conn->query($sql) === TRUE) {
-    echo "Producto " . $nombre . " creado con exito
+    if ($conn->query($sql) === TRUE) {
+        echo "Producto " . $nombre . " creado con exito
     <br><br>
     <a href = '../index.php'> Volver al formulario </a>
     ";
-} else {
-  echo "Error: " . $sql . "<br>" . $conn->error;
-}
-
-
-   
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
 } else {
     echo " <br><br><br>
     <a href = '../crear_producto/crear_producto.php'> Volver al formulario </a>

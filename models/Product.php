@@ -8,29 +8,32 @@ function checkCreateProduct($name, $price, $imagen, $select)
         return false;
     }
 }
-function selectCheck($select){
-if($select==""){
-    echo"Elige una categoria";
-    return false;
-}else{
-    return true;
-}
+function selectCheck($select)
+{
+
+    if (empty($select)) {
+        echo "ERROR - Elige una categoria";
+        return false;
+    } else {
+        return true;
+    }
 }
 
-function imageCheck($imagen){
-    if($imagen == "") {
-echo"La imagen no puede estar vacia";
-return false;
-        }else{
-            return true;
-        }
+function imageCheck($imagen)
+{
+    if ($imagen == "") {
+        echo "La imagen no puede estar vacia";
+        return false;
+    } else {
+        return true;
+    }
 }
 
 function nameCheck($name)
 {
 
-    if($name == ""){
-        echo"El nombre esta vacio";
+    if ($name == "") {
+        echo "El nombre esta vacio";
         return false;
     }
     $pattern = "/^\S*$/";
