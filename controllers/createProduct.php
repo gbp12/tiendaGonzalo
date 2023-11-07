@@ -38,7 +38,7 @@ if ($res) {
     }
 
     $sql = "INSERT INTO productos (id ,nombre, precio, imagen, categoría)
-VALUES ('NULL','$nombre', '$precio', '$fileDir', '$categoria')";
+VALUES (NULL,'$nombre', '$precio', '$fileDir', '$categoria')";
 
     if ($conn->query($sql) === TRUE) {
         echo "Producto " . $nombre . " creado con exito
