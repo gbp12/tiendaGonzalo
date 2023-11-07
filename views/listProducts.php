@@ -43,8 +43,8 @@ if (!$conn) {
             echo '<td>' . $producto["precio"] . '</td>';
             echo '<td>' . $producto["imagen"] . '</td>';
             echo '<td>' . $producto["nombre_categoria"] . '</td>';
-            echo '<td><form action="../controllers/deleteProduct.php" method="POST">
-<input type="hidden" name="eliminar" value="' . $producto["id"] . '">
+            echo '<td><form action="elimina_producto.php" method="get">
+<input type="hidden" name="id" value="' . $producto["id"] . '">
 <input type="submit" value="Eliminar">
 </form></td>';
             echo '<td><form action="./editProduct.php" method="get">
