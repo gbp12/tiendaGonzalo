@@ -1,17 +1,28 @@
 <?php
-$servername = "localhost";
-$username = "gonzalo";
-$password = "ak471234";
-$database = "tienda";
+$dbData = array(
+    "servername" => "",
+    "username" => "",
+    "password" => "",
+    "dbname" => ""
+);
+$defaultFile = fopen("../user_data.txt", "r");
 
-$conn = mysqli_connect($servername, $username, $password, $database);
+foreach ($dbData as $index => $value) {
+    $newLine = fgets($defaultFile);
+    $dbData[$index] = trim($newLine);
+}
+
+$conn = mysqli_connect($dbData["servername"], $dbData["username"], $dbData["password"], $dbData["dbname"]);
 
 if (!$conn) {
     die("Error de conexión: " . mysqli_connect_error());
 } else {
 
 
-    $sql = "SELECT * FROM Productos";
+    $sql = "SELECT P.*, C.nombre AS nombre_categoria
+        FROM productos P
+        LEFT JOIN categorías C ON P.categoría = C.id;";
+
     $result = mysqli_query($conn, $sql);
 
     if ($result) {
@@ -22,16 +33,16 @@ if (!$conn) {
         mysqli_close($conn);
 
         echo '<table border="1">';
-        echo '<tr><th>ID</th><th>Nombre</th><th>Precio</th><th>Imagen</th><th>Categoría</th></tr>';
+        echo '<tr><th>ID</th><th>Foto</th><th>Nombre</th><th>Precio</th><th>Imagen</th><th>Categoría</th></tr>';
 
         foreach ($rows as $producto) {
             echo '<tr>';
             echo '<td>' . $producto["id"] . '</td>';
-            echo '<td>' . $producto["Nombre"] . '</td>';
-            echo '<td>' . $producto["Precio"] . '</td>';
-            echo '<td>' . $producto["Imagen"] . '</td>';
-            echo '<td>' . $producto["Categoría"] . '</td>';
-            // Agregar un botón de eliminación
+            echo '<td><img alt=' . $producto["imagen"] . ' style="max-width: 150px;" src="../imagenes/' . $producto["imagen"] . '" ></td>';
+            echo '<td>' . $producto["nombre"] . '</td>';
+            echo '<td>' . $producto["precio"] . '</td>';
+            echo '<td>' . $producto["imagen"] . '</td>';
+            echo '<td>' . $producto["nombre_categoria"] . '</td>';
             echo '<td><form action="../controllers/deleteProduct.php" method="POST">
 <input type="hidden" name="eliminar" value="' . $producto["id"] . '">
 <input type="submit" value="Eliminar">
