@@ -17,6 +17,9 @@ require_once('controllers/auth.php');
     </br>
     </br>
     <a href="./views/listProducts.php">Consultar el listado de productos</a>
+    </br>
+    </br>
+    <a href="./views/logout.php">Cerrar sesión</a>
 </body>
 
 </html>
