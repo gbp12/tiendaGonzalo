@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-
+require_once('auth.php');
 include "../models/Product.php";
 $dbData = array(
     "servername" => "",
@@ -16,11 +16,8 @@ $defaultFile = fopen("../user_data.txt", "r");
 
 foreach ($dbData as $index => $value) {
     $newLine = fgets($defaultFile);
-    //echo"$newLine <br>";
     $dbData[$index] = trim($newLine);
 }
-//print_r($dbData);
-
 
 
 if ($res) {
@@ -32,7 +29,6 @@ if ($res) {
 
     $conn = new mysqli($dbData["servername"], $dbData["username"], $dbData["password"], $dbData["dbname"]);
 
-    // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }

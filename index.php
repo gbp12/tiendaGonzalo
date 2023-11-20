@@ -1,3 +1,7 @@
+<?php
+require_once('controllers/auth.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

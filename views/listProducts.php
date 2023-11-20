@@ -1,4 +1,5 @@
 <?php
+require_once('../controllers/auth.php');
 $dbData = array(
     "servername" => "",
     "username" => "",

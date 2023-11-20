@@ -1,3 +1,6 @@
+<?php
+require_once('../controllers/auth.php');
+?>
 <!DOCTYPE html>
 <form method="post" action="../controllers/createProduct.php" enctype="multipart/form-data">
 
